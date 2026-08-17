@@ -10,7 +10,7 @@ app_description = (
 )
 app_email = "support@example.com"
 app_license = "mit"
-app_version = "1.0.0"
+app_version = "1.1.0"
 
 # ERPNext only. Payroll integration is optional and detected at runtime, so
 # this app installs and runs on a site without the Ghana Payroll app.

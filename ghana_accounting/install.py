@@ -639,6 +639,16 @@ def setup():
 		frappe.log_error(
 			title="Ghana Accounting: dashboards skipped", message=frappe.get_traceback()
 		)
+
+	try:
+		from ghana_accounting.sidebar import build_sidebar
+
+		build_sidebar()
+	except Exception:
+		frappe.log_error(
+			title="Ghana Accounting: sidebar skipped", message=frappe.get_traceback()
+		)
+
 	return result
 
 
@@ -653,8 +663,9 @@ def before_uninstall():
 	for doctype, name in (
 		("Print Format", "Ghana Journal Voucher"),
 		("Workspace", "Ghana Accounting"),
+		("Workspace Sidebar", "Ghana Accounting"),
 	):
-		if frappe.db.exists(doctype, name):
+		if frappe.db.exists("DocType", doctype) and frappe.db.exists(doctype, name):
 			try:
 				frappe.delete_doc(doctype, name, ignore_permissions=True, force=True)
 			except Exception:
